@@ -1,36 +1,47 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FloPro Pools - Marine-Grade Asset Management
+
+A high-performance Next.js 14 website for FloPro Pools, featuring a "Deep Harbor" visual identity with Navy Blue, Brushed Titanium, and Signal Orange colors.
+
+## Features
+
+- **Interactive Hero Section** with dynamic background images and Asset Assessment Engine
+- **Glassmorphism UI** throughout with frosted glass effects
+- **Project Gallery** with modal detail views
+- **Testimonials Section** with animations
+- **Local SEO Landing Pages** for Punta Gorda Isles, North Port, and Rotonda West
+- **Trust Beacon** persistent UI element
+- **Responsive Design** optimized for all devices
+
+## Tech Stack
+
+- Next.js 14 (App Router)
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion
+- Lucide React Icons
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deployment
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This site is configured for deployment on Netlify. Simply connect your GitHub repository to Netlify and it will automatically deploy.
 
-## Learn More
+## License
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+© 2024 FloPro Pools. All rights reserved.
