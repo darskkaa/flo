@@ -29,7 +29,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <JsonLd />
+      <head>
+        <JsonLd />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

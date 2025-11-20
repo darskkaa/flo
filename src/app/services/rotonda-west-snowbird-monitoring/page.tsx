@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function RotondaPage() {
     return (
         <main>
-            <HeroSection defaultSegment="seasonal" />
+            <HeroSection defaultSegment="monthly" />
             <FeatureGrid />
         </main>
     );

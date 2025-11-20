@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function NorthPortPage() {
     return (
         <main>
-            <HeroSection defaultSegment="rental" />
+            <HeroSection defaultSegment="biweekly" />
             <FeatureGrid />
         </main>
     );

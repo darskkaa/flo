@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 export default function PgiPage() {
     return (
         <main>
-            <HeroSection defaultSegment="canal" />
+            <HeroSection defaultSegment="weekly" />
             <FeatureGrid />
         </main>
     );
