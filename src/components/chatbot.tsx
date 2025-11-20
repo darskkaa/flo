@@ -119,11 +119,14 @@ export function Chatbot() {
                                 >
                                     <div
                                         className={`max-w-[80%] rounded-2xl px-4 py-2 ${message.role === 'user'
-                                                ? 'bg-signal-orange text-white'
-                                                : 'bg-white/10 text-white border border-white/10'
+                                            ? 'bg-signal-orange text-white'
+                                            : 'bg-white/10 text-white border border-white/10'
                                             }`}
                                     >
-                                        <p className="text-sm whitespace-pre-wrap">{message.content}</p>
+                                        <div
+                                            className="text-sm whitespace-pre-wrap [&>a]:underline [&>a]:font-bold [&>ul]:list-disc [&>ul]:pl-4 [&>ol]:list-decimal [&>ol]:pl-4 [&>strong]:font-bold"
+                                            dangerouslySetInnerHTML={{ __html: message.content }}
+                                        />
                                     </div>
                                 </motion.div>
                             ))}
