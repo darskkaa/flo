@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Anchor, Shield, Wifi, ArrowRight, CheckCircle2, Activity } from 'lucide-react';
+import { Droplets, Wrench, Calendar, ArrowRight, CheckCircle2, Activity } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { clsx, type ClassValue } from 'clsx';
@@ -13,39 +13,36 @@ function cn(...inputs: ClassValue[]) {
 }
 
 interface HeroSectionProps {
-    defaultSegment?: 'canal' | 'rental' | 'seasonal';
+    defaultSegment?: 'weekly' | 'biweekly' | 'monthly';
 }
 
-export function HeroSection({ defaultSegment = 'canal' }: HeroSectionProps) {
-    const [activeSegment, setActiveSegment] = useState<'canal' | 'rental' | 'seasonal'>(defaultSegment);
+export function HeroSection({ defaultSegment = 'weekly' }: HeroSectionProps) {
+    const [activeSegment, setActiveSegment] = useState<'weekly' | 'biweekly' | 'monthly'>(defaultSegment);
 
     const content = {
-        canal: {
-            title: "Corrosion Defense Protocol",
-            subtitle: "PGI Canal Specialist",
-            description: "Salt mist destroys heaters and cages. Our protocol includes a freshwater equipment rinse and sacrificial anode checks to extend asset life.",
-            icon: Anchor,
-            features: ["Salt-Stop Rinse", "Anode Integrity Check", "Cage Rust Prevention"],
+        weekly: {
+            title: "Weekly Pool Service",
+            subtitle: "Most Popular",
+            description: "Complete pool cleaning and maintenance every week. Perfect for keeping your pool crystal clear year-round.",
+            icon: Droplets,
+            features: ["Chemical Balancing", "Skimming & Vacuuming", "Filter Cleaning"],
             bgImage: "/images/canal-pool.jpg",
-            loadingText: "Loading Corrosion Defense Protocol..."
         },
-        rental: {
-            title: "Gate-Shut Guarantee",
-            subtitle: "North Port Investor Protection",
-            description: "We verify every gate is shut and latched with a GPS-timestamped photo. Perfect for North Port families and rental properties.",
-            icon: Shield,
-            features: ["Gate-Shut Verification", "Pet Safety Check", "Renter Turnover Reports"],
+        biweekly: {
+            title: "Bi-Weekly Service",
+            subtitle: "Best Value",
+            description: "Professional pool care every two weeks. Ideal for pools with moderate use and well-maintained equipment.",
+            icon: Wrench,
+            features: ["Equipment Check", "Chemical Testing", "Debris Removal"],
             bgImage: "/images/gated-pool.jpg",
-            loadingText: "Loading Pet-Safe Guarantee & Photo Logs..."
         },
-        seasonal: {
-            title: "Remote Eyes Dashboard",
-            subtitle: "Rotonda Snowbird Watch",
-            description: "Away for the summer? Get a weekly video report and digital chemical log delivered to your phone. You'll never wonder if the pool guy showed up.",
-            icon: Wifi,
-            features: ["Weekly Video Reports", "Digital Chem Logs", "Storm Prep Alerts"],
+        monthly: {
+            title: "Monthly Maintenance",
+            subtitle: "Seasonal Homes",
+            description: "Monthly inspections and maintenance perfect for snowbirds and seasonal residents. Includes photo reports.",
+            icon: Calendar,
+            features: ["Full Inspection", "Photo Reports", "Storm Prep"],
             bgImage: "/images/canal-pool.jpg",
-            loadingText: "Loading Remote Eyes Digital Dashboard..."
         }
     };
 
@@ -79,7 +76,7 @@ export function HeroSection({ defaultSegment = 'canal' }: HeroSectionProps) {
             <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-20">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-                    {/* Left Column: Text & Assessment Engine */}
+                    {/* Left Column: Text & Service Selector */}
                     <div>
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
@@ -88,13 +85,13 @@ export function HeroSection({ defaultSegment = 'canal' }: HeroSectionProps) {
                         >
                             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-titanium-200/10 border border-titanium-200/20 text-sm font-medium text-titanium-200 mb-6 backdrop-blur-sm">
                                 <Activity className="w-4 h-4 text-signal-orange" />
-                                <span>Marine-Grade Asset Management</span>
+                                <span>Professional Pool Care & Maintenance</span>
                             </div>
 
                             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6 leading-tight text-white">
                                 FloPro Pools: <br />
                                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-titanium-100 to-titanium-200/70">
-                                    Marine-Grade Care
+                                    Port Charlotte's Pool Experts
                                 </span>
                             </h1>
 
@@ -103,14 +100,14 @@ export function HeroSection({ defaultSegment = 'canal' }: HeroSectionProps) {
                             </div>
 
                             <p className="text-xl text-titanium-200/80 mb-10 max-w-lg leading-relaxed">
-                                Salt eats heaters. Renters leave gates open. We are the only protocol engineered for PGI Canals and North Port investments.
+                                Expert pool cleaning, maintenance, and repair services for Port Charlotte, Punta Gorda, North Port, and Englewood. We keep your pool crystal clear year-round.
                             </p>
                         </motion.div>
 
-                        {/* Asset Assessment Engine */}
+                        {/* Service Selector */}
                         <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 overflow-hidden shadow-2xl">
                             <div className="flex border-b border-white/10">
-                                {(['canal', 'rental', 'seasonal'] as const).map((segment) => (
+                                {(['weekly', 'biweekly', 'monthly'] as const).map((segment) => (
                                     <button
                                         key={segment}
                                         onClick={() => setActiveSegment(segment)}
@@ -119,9 +116,9 @@ export function HeroSection({ defaultSegment = 'canal' }: HeroSectionProps) {
                                             activeSegment === segment ? "text-white" : "text-white/40 hover:text-white/70"
                                         )}
                                     >
-                                        {segment === 'canal' && "I live on a Canal"}
-                                        {segment === 'rental' && "I rent my home"}
-                                        {segment === 'seasonal' && "I am seasonal"}
+                                        {segment === 'weekly' && "Weekly"}
+                                        {segment === 'biweekly' && "Bi-Weekly"}
+                                        {segment === 'monthly' && "Monthly"}
 
                                         {activeSegment === segment && (
                                             <motion.div
@@ -179,7 +176,7 @@ export function HeroSection({ defaultSegment = 'canal' }: HeroSectionProps) {
                                             href="/contact"
                                             className="w-full sm:w-auto inline-flex items-center justify-center rounded-lg bg-signal-orange px-8 py-4 text-sm font-bold text-white shadow-lg shadow-orange-900/30 hover:bg-orange-500 hover:shadow-orange-900/50 transition-all group"
                                         >
-                                            Start Asset Protection
+                                            Get Your Free Quote
                                             <ArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
                                         </Link>
                                     </motion.div>
@@ -188,7 +185,7 @@ export function HeroSection({ defaultSegment = 'canal' }: HeroSectionProps) {
                         </div>
                     </div>
 
-                    {/* Right Column: Visual Abstract Representation */}
+                    {/* Right Column: Visual */}
                     <div className="hidden lg:flex justify-center items-center relative">
                         <div className="absolute inset-0 bg-gradient-to-tr from-signal-orange/20 to-blue-500/20 blur-[120px] rounded-full opacity-40 animate-pulse"></div>
                         <motion.div
@@ -206,18 +203,12 @@ export function HeroSection({ defaultSegment = 'canal' }: HeroSectionProps) {
                             <div className="absolute bottom-8 left-8 right-8">
                                 <div className="flex justify-between items-end">
                                     <div>
-                                        <div className="text-xs text-white/40 uppercase tracking-widest mb-1">Status</div>
-                                        <div className="text-lg font-mono text-signal-orange flex items-center gap-2">
-                                            <span className="relative flex h-2 w-2">
-                                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                                                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
-                                            </span>
-                                            Active Monitoring
-                                        </div>
+                                        <div className="text-xs text-white/40 uppercase tracking-widest mb-1">Service Area</div>
+                                        <div className="text-lg font-mono text-signal-orange">Port Charlotte, FL</div>
                                     </div>
                                     <div className="text-right">
-                                        <div className="text-xs text-white/40 uppercase tracking-widest mb-1">Protocol</div>
-                                        <div className="text-lg font-mono text-white">v4.2.0</div>
+                                        <div className="text-xs text-white/40 uppercase tracking-widest mb-1">Since</div>
+                                        <div className="text-lg font-mono text-white">2020</div>
                                     </div>
                                 </div>
                             </div>

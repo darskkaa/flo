@@ -5,6 +5,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { JsonLd } from "@/components/json-ld";
 import { TrustBeacon } from "@/components/trust-beacon";
+import { SplashScreen } from "@/components/splash-screen";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,8 +18,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "FloPro Pools | Marine-Grade Asset Management",
-  description: "The only pool service engineered for PGI Canals and North Port families. Stop salt corrosion and verify gate safety with FloPro.",
+  title: "FloPro Pools | Pool Care & Maintenance in Port Charlotte, FL",
+  description: "Professional pool cleaning, maintenance, and repair services in Port Charlotte, Punta Gorda, North Port, and Englewood. Starting at $99/month.",
 };
 
 export default function RootLayout({
@@ -28,14 +29,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <JsonLd />
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <JsonLd />
+        <SplashScreen />
         <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
+        {children}
         <Footer />
         <TrustBeacon />
       </body>
