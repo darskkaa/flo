@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { FAQ } from './knowledge';
 
 const GEMINI_API_KEY = 'AIzaSyATGDcqNGErvlmiouChxX83_jHsNTC0UMg';
-const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent';
+const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
 
 const SYSTEM_CONTEXT = `You are FloPro Pools' expert AI assistant. Your goal is to be helpful, knowledgeable, and persuasive to convert visitors into clients.
 
@@ -12,21 +11,17 @@ CORE OBJECTIVES:
 3. Encourage users to get a free quote or call <a href="tel:9415550123" class="underline">(941) 555-0123</a>.
 4. Be friendly, professional, and concise (2-3 sentences max).
 
-SERVICE AREA:
-Port Charlotte, Punta Gorda, North Port, Englewood, FL.
+COMPANY KNOWLEDGE BASE:
+- **Service Area**: Port Charlotte, Punta Gorda, North Port, Englewood, FL.
+- **Pricing**: Starts at $99/month for basic weekly service. Custom quotes for larger pools/special requests.
+- **Services**: Weekly/Bi-weekly/Monthly cleaning, Chemical balancing, Equipment repair, Filter cleaning, Salt-water maintenance.
+- **Specialties**: "Marine-Grade" care for canal homes, Pet-safe chemicals, Gate-shut guarantee.
+- **Contact**: Phone <a href="tel:9415550123" class="underline">(941) 555-0123</a>, Email service@flopropools.com.
 
-PRICING:
-- Weekly Service: Starts at $99/month.
-- Repairs/One-time: Custom quotes.
-
-KEY SELLING POINTS:
-- "Marine-Grade" care for salt water & canal pools.
-- Pet-safe chemicals & gate verification.
-- Digital reports with photos after every visit.
-- No contracts, satisfaction guaranteed.
-
-IMPORTANT FORMATTING:
-- Always format phone numbers as: <a href="tel:9415550123" class="underline">(941) 555-0123</a>
+IMPORTANT FORMATTING RULES:
+- **ALWAYS** format phone numbers exactly as: <a href="tel:9415550123" class="underline">(941) 555-0123</a>
+- **ALWAYS** format the "Services" page link as: <a href="/services" class="underline">Services Page</a>
+- **ALWAYS** format the "Contact" page link as: <a href="/contact" class="underline">Contact Page</a>
 
 SAFETY & LIMITATIONS:
 - Do NOT give medical, legal, or financial advice.
@@ -74,18 +69,7 @@ export async function POST(request: NextRequest) {
 
         const sanitizedMessage = sanitizeInput(message);
 
-        // 1. Check FAQ first (Instant Answer)
-        const lower = sanitizedMessage.toLowerCase();
-        const faqMatch = FAQ.find((item) => lower.includes(item.question.toLowerCase()));
-
-        if (faqMatch) {
-            return NextResponse.json(
-                { response: faqMatch.answer },
-                { headers: { 'Access-Control-Allow-Origin': '*' } }
-            );
-        }
-
-        // 2. Call Gemini API (Smart Answer)
+        // Call Gemini API directly (No static FAQ lookup)
         const response = await fetch(`${GEMINI_API_URL}?key=${GEMINI_API_KEY}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -97,18 +81,20 @@ export async function POST(request: NextRequest) {
                 }],
                 generationConfig: {
                     temperature: 0.7,
-                    maxOutputTokens: 150,
+                    maxOutputTokens: 200,
                 }
             }),
         });
 
         if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`Gemini API Error (${response.status}):`, errorText);
             throw new Error(`Gemini API Error: ${response.status}`);
         }
 
         const data = await response.json();
         const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text ||
-            "I'd be happy to help! Please call us at (941) 555-0123 for a quick quote.";
+            "I'd be happy to help! Please call us at <a href=\"tel:9415550123\" class=\"underline\">(941) 555-0123</a> for a quick quote.";
 
         return NextResponse.json(
             { response: aiResponse },
@@ -119,7 +105,7 @@ export async function POST(request: NextRequest) {
         console.error('Chat API error:', error);
         // Fallback if API fails
         return NextResponse.json(
-            { response: "I'm having a moment, but I'd love to help. Please call (941) 555-0123 for immediate assistance!" },
+            { response: "I'm having a moment, but I'd love to help. Please call <a href=\"tel:9415550123\" class=\"underline\">(941) 555-0123</a> for immediate assistance!" },
             { status: 200, headers: { 'Access-Control-Allow-Origin': '*' } }
         );
     }
