@@ -2,6 +2,7 @@
 
 import { X, Check, AlertTriangle, ShieldCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export function ComparisonSection() {
     const containerVariants = {
@@ -121,7 +122,6 @@ export function ComparisonSection() {
                     </motion.div>
                 </motion.div>
 
-                {/* CTA */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -129,7 +129,10 @@ export function ComparisonSection() {
                     transition={{ delay: 0.3 }}
                     className="text-center"
                 >
-                    <button className="inline-flex items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 text-sm font-bold text-white hover:bg-white/20 hover:border-white/30 transition-all group">
+                    <Link
+                        href="/contact"
+                        className="inline-flex items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm border border-white/20 px-8 py-4 text-sm font-bold text-white hover:bg-white/20 hover:border-white/30 transition-all group"
+                    >
                         See Our Technology in Action
                         <motion.span
                             className="ml-2"
@@ -138,7 +141,7 @@ export function ComparisonSection() {
                         >
                             →
                         </motion.span>
-                    </button>
+                    </Link>
                 </motion.div>
             </div>
         </section>
