@@ -6,6 +6,7 @@ import { Footer } from "@/components/footer";
 import { JsonLd } from "@/components/json-ld";
 import { TrustBeacon } from "@/components/trust-beacon";
 import { SplashScreen } from "@/components/splash-screen";
+import { Chatbot } from "@/components/chatbot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,6 +41,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <TrustBeacon />
+        <Chatbot />
       </body>
     </html>
   );
